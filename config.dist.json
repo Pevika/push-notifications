@@ -1,5 +1,6 @@
 {
 	"port": "3000",
+	"host": "localhost",
 	"allowed_origins": "127.0.0.1",
 	"allowed_methods": "POST,OPTIONS",
 	"allowed_headers": "Content-Type,X-Request-With",

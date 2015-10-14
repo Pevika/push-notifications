@@ -7,8 +7,8 @@
 	var express = require("express");
 	var config = require("./config.json");
 	var bodyParser = require("body-parser");
-	
 	var ApplePush = require("./apple");
+	var Logger = require("./logger");
 	
 	var app = express();
 	
@@ -96,6 +96,8 @@
 		}
 	});
 	
-	app.listen(config.port);
+	app.listen(config.port, config.host, function () {
+		Logger.log("Server is listening on", config.host, "port", config.port);
+	});
 	
 }).call(this);
