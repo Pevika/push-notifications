@@ -18,17 +18,19 @@
 	
 	function setupApn(index, data) {
 		var agent = new apnagent.Agent();
-		agent.set("pfx file", path.join(__dirname, data.certificate));
+		var file = path.join(__dirname, data.certificate);
+		Logger.log("[" + index + "]", "Trying to load", file);
+		agent.set("pfx file", file);
 		agent.enable(data.env);
 		agent.connect(function (err) {
 			if (err) {
-				Logger.error("Cannot connect to", index, ":", err);
+				Logger.error("[" + index + "]", "Cannot connect:", err.message);
 				throw err;
 			}
 			else {
-				Logger.log("APNAgent is connect to", index, "(" + data.env + ")");
+				Logger.log("[" + index + "]", "APNAgent is connected", "(" + data.env + ")");
 				agent.on("message:error", function (err) {
-					Logger.error("APNAgent encountered an error", err.name, ":", err.message);
+					Logger.error("[" + index + "]", "APNAgent encountered an error", err.name, ":", err.message);
 				});
 			}
 		});
