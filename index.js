@@ -18,7 +18,17 @@
 		res.setHeader("Access-Control-Allow-Origin", config.allowed_origins);
 		res.setHeader("Access-Control-Allow-Methods", config.allowed_methods);
 		res.setHeader("Access-Control-Allow-Headers", config.allowed_headers);
+		res.setHeader("Content-Type", "application/json");
 		next();
+	});
+	
+	app.use(function (req, res, next) {
+		if (req.headers && req.headers.apikey && req.headers.apikey == config.api_key) {
+			next();
+		}
+		else {
+			res.status(403).send({});
+		}
 	});
 	
 	function checkString(d) {

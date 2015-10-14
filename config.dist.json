@@ -9,5 +9,6 @@
 			"certificate": "certs/production.p12",
 			"env": "prod"
 		}
-	}
+	},
+	"api_key": "123456789"
 }
